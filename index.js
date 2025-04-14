@@ -24,6 +24,7 @@ app.use(EXPRESS.json());
 
 
 app.use("/",require("./routers/indexRouter"));
+app.use("/products",require("./routers/productsRouter"));
 
 app.use((req,res,next)=>{
     res.status(404).send("File not found!");

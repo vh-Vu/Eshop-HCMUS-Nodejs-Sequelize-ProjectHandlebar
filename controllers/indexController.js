@@ -15,6 +15,11 @@ controller.showHomePage = async(req,res) => {
         limit: 10
     })
     res.locals.featuredProduct = P;
+    res.locals.recentProduct = await Products.findAll({
+        attributes: ["id","name","imagePath","price","oldPrice","stars"],
+        order: [["createdAt","DESC"]],
+        limit: 10
+    })
     res.locals.Brand = await Brands.findAll();
     const categories = await Categories.findAll();
     const second = categories.splice(2,2);

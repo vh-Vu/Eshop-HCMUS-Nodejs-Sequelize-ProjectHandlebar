@@ -129,11 +129,6 @@
                                 <div class="title"><a href="/product-detail/{{id}}">{{name}}</a></div>
                                 <div class="ratting">
                                     {{{createRatingStar stars}}}
-                                    {{!-- <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i> --}}
                                 </div>
                                 <div class="price">${{price}} <span>${{oldPrice}}</span></div>
                             </div>
@@ -299,11 +294,12 @@
                     </p>
                 </div>
                 <div class="row align-items-center product-slider product-slider-4">
+                    {{#each recentProduct}}
                     <div class="col-lg-3">
                         <div class="product-item">
-                            <div class="product-image">
-                                <a href="product-detail.html">
-                                    <img src="img/product-2.png" alt="Product Image">
+                             <div class="product-image">
+                                <a href="/product-detail/{{id}}">
+                                    <img src="{{imagePath}}" alt="{{name}}">
                                 </a>
                                 <div class="product-action">
                                     <a href="#"><i class="fa fa-cart-plus"></i></a>
@@ -312,18 +308,15 @@
                                 </div>
                             </div>
                             <div class="product-content">
-                                <div class="title"><a href="#">Phasellus Gravida</a></div>
+                                <div class="title"><a href="/product-detail/{{id}}">{{name}}</a></div>
                                 <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    {{{createRatingStar stars}}}
                                 </div>
-                                <div class="price">$22 <span>$25</span></div>
+                                <div class="price">${{price}} <span>${{oldPrice}}</span></div>
                             </div>
                         </div>
                     </div>
+                    {{/each}}
                     <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-image">

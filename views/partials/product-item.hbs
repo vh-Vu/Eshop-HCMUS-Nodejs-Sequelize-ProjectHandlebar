@@ -1,0 +1,21 @@
+<div class="col-lg-4">
+    <div class="product-item">
+        <div class="product-image">
+            <a href="{{id}}">
+                <img src="{{imagePath}}" alt="{{name}}">
+            </a>
+            <div class="product-action">
+                <a href="#"><i class="fa fa-cart-plus"></i></a>
+                <a href="#"><i class="fa fa-heart"></i></a>
+                <a href="#"><i class="fa fa-search"></i></a>
+            </div>
+        </div>
+        <div class="product-content">
+            <div class="title"><a href="#">{{name}}</a></div>
+            <div class="ratting">
+                {{{createRatingStar stars}}}
+            </div>
+            <div class="price">${{price}} <span>${{oldPrice}}</span></div>
+        </div>
+    </div>
+</div>
