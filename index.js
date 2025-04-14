@@ -19,35 +19,14 @@ app.set("view engine", "hbs");
 app.use(EXPRESS.json());
 
 
-app.get("/",(req,res)=>
-    res.render("index")
-);
-app.get("/product-list",(req,res)=>
-    res.render("product-list")
-);
+app.use("/",require("./routers/indexRouter"));
 
-app.get("/product-detail",(req,res)=>
-    res.render("product-detail")
-);
+app.use((req,res,next)=>{
+    res.status(404).send("File not found!");
+});
 
-app.get("/checkout",(req,res)=>
-    res.render("checkout")
-);
-
-app.get("/login",(req,res)=>
-    res.render("login")
-);
-app.get("/my-account",(req,res)=>
-    res.render("my-account")
-);
-app.get("/wishlist",(req,res)=>
-    res.render("wishlist")
-);
-app.get("/cart",(req,res)=>
-    res.render("cart")
-);
-app.get("/contact",(req,res)=>
-    res.render("contact")
+app.use((error,req,res,next) =>
+    res.status(500).send("Internal Servel Error")
 );
 
 app.listen(PORT,() => {
