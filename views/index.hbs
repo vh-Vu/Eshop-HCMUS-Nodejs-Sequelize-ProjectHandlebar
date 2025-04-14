@@ -61,15 +61,20 @@
         <div class="category">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="category-img">
-                            <img src="img/category-1.jpg" />
-                            <a class="category-name" href="">
-                                <h2>Category Name</h2>
-                            </a>
+                    {{#each Categories}}
+                        <div class="col-md-4">
+                            {{#each this}}
+                            <div class="category-img">
+                                <img src="{{imagePath}}" />
+                                <a class="category-name" href="/categories/{{id}}">
+                                    <h2>{{name}}</h2>
+                                </a>
+                            </div>
+                            {{/each}}
                         </div>
-                    </div>
-                    <div class="col-md-4">
+                    {{/each}}
+                    
+                    {{!-- <div class="col-md-4">
                         <div class="category-img">
                             <img src="img/category-3.jpg" />
                             <a class="category-name" href="">
@@ -90,7 +95,7 @@
                                 <h2>Category Name</h2>
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -107,7 +112,35 @@
                     </p>
                 </div>
                 <div class="row align-items-center product-slider product-slider-4">
+                    {{#each featuredProduct}}
                     <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-image">
+                                <a href="/product-detail/{{id}}">
+                                    <img src="{{imagePath}}" alt="{{name}}">
+                                </a>
+                                <div class="product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="title"><a href="/product-detail/{{id}}">{{name}}</a></div>
+                                <div class="ratting">
+                                    {{{createRatingStar stars}}}
+                                    {{!-- <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i> --}}
+                                </div>
+                                <div class="price">${{price}} <span>${{oldPrice}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{!-- <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-image">
                                 <a href="product-detail.html">
@@ -231,7 +264,7 @@
                                 <div class="price">$22 <span>$25</span></div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -407,12 +440,15 @@
                     </p>
                 </div>
                 <div class="brand-slider">
-                    <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
+                    {{#each Brands}}
+                    <div class="brand-item"><img src="{{imagePath}}" alt="{{name}}"></div>
+                    {{/each}}
+                        {{!-- <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
+                        <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
+                        <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
+                        <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
+                        <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
+                        <div class="brand-item"><img src="img/brand-6.png" alt=""></div> --}}
                 </div>
             </div>
         </div>
