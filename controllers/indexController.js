@@ -27,7 +27,7 @@ controller.showHomePage = async(req,res) => {
 controller.showPage = (req,res,next) =>{
     if(Pages.has(req.params.page)){
         res.locals.page = req.params.page;
-        res.render("contact");
+        res.render(req.params.page);
     }else   next();
 }
 
