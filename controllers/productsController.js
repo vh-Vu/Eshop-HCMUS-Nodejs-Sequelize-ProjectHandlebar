@@ -52,7 +52,16 @@ controller.showProductPage = async(req,res) =>{
 controller.showDetailPage = async(req,res) => {
 
     let id  = simpleParser(0,req.params.id);
-    res.locals.product = await Products.findByPk(id)
+    res.locals.product = await Products.findByPk(id,{
+        include : [
+            {model: models.Image, attributes: ["name","imagePath"]},
+            {model: models.Review, attributes: ["review", "stars","createdAt"],
+                include:[
+                    {model: models.User, attributes: ["id","firstName","lastName"]}
+                ]}
+        ]
+    });
+    console.log(res.locals.product)
     res.render("product-detail");
 }
 

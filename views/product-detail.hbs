@@ -20,7 +20,10 @@
                     <div class="row align-items-center product-detail-top">
                     <div class="col-md-5">
                         <div class="product-slider-single">
+                            {{!-- <img src="{{imagePath}}" alt="{{name}}"> --}}
+                            {{#each Images}}
                             <img src="{{imagePath}}" alt="{{name}}">
+                            {{/each}}
                             {{!-- <img src="/img/product-2.png" alt="Product Image">
                             <img src="/img/product-3.png" alt="Product Image"> --}}
                         </div>
@@ -33,9 +36,7 @@
                             </div>
                             <div class="price">${{price}} <span>${{oldPrice}}</span></div>
                             <div class="details">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non.
-                                </p>
+                                <p>{{summary}}</p>
                             </div>
 
                             <div class="quantity">
@@ -77,28 +78,20 @@
                             <div id="specification" class="container tab-pane fade"><br>
                                 <h4>Product specification</h4>
                                 {{specification}}
-                                {{!-- <ul>
-                                    <li>Lorem ipsum dolor sit amet</li>
-                                    <li>Lorem ipsum dolor sit amet</li>
-                                    <li>Lorem ipsum dolor sit amet</li>
-                                    <li>Lorem ipsum dolor sit amet</li>
-                                    <li>Lorem ipsum dolor sit amet</li>
-                                </ul> --}}
                             </div>
                             <div id="reviews" class="container tab-pane fade"><br>
+                                {{#each Reviews}}
                                 <div class="reviews-submitted">
-                                    <div class="reviewer">Phasellus Gravida - <span>01 Jan 2020</span></div>
-                                    <div class="ratting">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <p>
-                                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
-                                    </p>
+                                    {{#with User}}
+                                    <div class="reviewer">{{firstName}} {{lastName}} - <span>{{{formatDate ../createdAt}}}</span></div>
+                                    {{/with}}
+
+                                    {{{createRatingStar stars}}}
+
+                                    <p>{{review}}</p>
                                 </div>
+                                {{/each}}
+                                
                                 <div class="reviews-submit">
                                     <h4>Give your Review:</h4>
                                     <div class="ratting">
