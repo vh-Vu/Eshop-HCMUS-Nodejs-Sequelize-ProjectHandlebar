@@ -1,5 +1,5 @@
 const controller = {};
-const { where } = require("sequelize");
+const sequelize = require("sequelize");
 const models = require("../models");
 const Products = models.Product;
 const Categories = models.Category;
@@ -42,7 +42,11 @@ controller.showProductPage = async(req,res) =>{
     );
     brand = simpleParser(0,brand);
     if(brand)  options.where.brandId = brand;
-
+    if (keyword.trim()!=""){
+        options.where.name = {
+            [sequelize.Op.iLike] : `%${keyword}%`
+        };
+    }
 
 
     res.locals.products = await Products.findAll(options);
