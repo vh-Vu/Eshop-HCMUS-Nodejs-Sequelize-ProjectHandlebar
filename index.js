@@ -2,7 +2,7 @@ const EXPRESS = require("express");
 const PORT = 50505 
 const app = EXPRESS()
 const expressHBS = require("express-handlebars");
-const {createRatingStar} = require("./helper/helperHBS");
+const {createRatingStar, formatDate} = require("./helper/helperHBS");
 
 app.use(EXPRESS.static(__dirname + "/html"));
 app.engine(
@@ -16,6 +16,7 @@ app.engine(
         },
         helpers: {
             createRatingStar,
+            formatDate
         }
     })
 );
