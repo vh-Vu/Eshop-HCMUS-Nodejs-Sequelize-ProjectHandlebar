@@ -31,8 +31,8 @@ controller.showProductPage = async(req,res) =>{
         include: [],
         where: {}
     };
-    let {category, tag, brand, keyword ="",page } = req.query;
-
+    let {category, tag, brand, keyword ="",sort,page } = req.query;
+    sort = ["price","newest","popular"].includes(sort) ? sort: "price";
     category = simpleParser(0,category);
     if(category)  options.where.categoryId = category;
 
@@ -48,9 +48,26 @@ controller.showProductPage = async(req,res) =>{
         };
     }
 
+    switch(sort){
+        case "price":
+            options.order = [["price","ASC"]];
+            break;
+        case "newest":
+            options.order = [["createdAt","DESC"]];
+            break;
+        default:
+            options.order = [["stars","DESC"]];
+    }
 
     res.locals.products = await Products.findAll(options);
-    res.render("product-list");
+    res.locals.URL = {
+        price: new URLSearchParams({...req.query,sort:"price"}).toString(),
+        newest: new URLSearchParams({...req.query,sort:"newest"}).toString(),
+        popular: new URLSearchParams({...req.query,sort:"popular"}).toString(),
+
+};
+
+    res.render("product-list",{sort});
 }
 
 controller.showDetailPage = async(req,res) => {

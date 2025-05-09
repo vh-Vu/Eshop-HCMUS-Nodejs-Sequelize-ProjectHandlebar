@@ -29,10 +29,13 @@
                                     <div class="col-md-4">
                                         <div class="product-short">
                                             <div class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Product short by</a>
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Product sort by {{sort}}</a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item">Newest</a>
-                                                    <a href="#" class="dropdown-item">Popular</a>
+                                                    {{#with URL}}
+                                                    <a href="/products?{{price}}" class="dropdown-item">Price</a>
+                                                    <a href="/products?{{newest}}" class="dropdown-item">Newest</a>
+                                                    <a href="/products?{{popular}}" class="dropdown-item">Popular</a>
+                                                    {{/with}}
                                                 </div>
                                             </div>
                                         </div>
