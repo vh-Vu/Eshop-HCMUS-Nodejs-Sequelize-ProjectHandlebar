@@ -3,8 +3,12 @@ const PORT = 50505
 const app = EXPRESS()
 const expressHBS = require("express-handlebars");
 const {createRatingStar, formatDate} = require("./helper/helperHBS");
+const { createPagination } = require("express-handlebars-paginate")
+
 
 app.use(EXPRESS.static(__dirname + "/html"));
+app.use(EXPRESS.json());
+
 app.engine(
     "hbs",
     expressHBS.engine({
@@ -16,12 +20,12 @@ app.engine(
         },
         helpers: {
             createRatingStar,
-            formatDate
+            formatDate,
+            createPagination
         }
     })
 );
 app.set("view engine", "hbs");
-app.use(EXPRESS.json());
 
 
 app.use("/",require("./routers/indexRouter"));
