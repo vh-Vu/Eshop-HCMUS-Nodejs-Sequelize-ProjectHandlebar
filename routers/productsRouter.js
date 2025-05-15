@@ -1,9 +1,9 @@
 const EXPRESS = require("express");
 const router = EXPRESS.Router();
-const controller = require("../controllers/productsController")
+const ProductController = require("../controllers/productsController")
 
-router.use(controller.init);
-router.get("/", controller.showProductPage);
-router.get("/:id", controller.showDetailPage);
+router.use(ProductController.init);
+router.get("/", ProductController.showProductPage);
+router.get("/:id", ProductController.showDetailPage);
 
 module.exports = router;
