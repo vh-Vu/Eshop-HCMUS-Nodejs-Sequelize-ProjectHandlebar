@@ -49,6 +49,7 @@ app.use((req,res,next) =>{
 
 app.use("/",require("./routers/indexRouter"));
 app.use("/products",require("./routers/productsRouter"));
+app.use("/cart",require("./routers/cartRouter"));
 
 app.use((req,res,next)=>{
     res.status(404).send("File not found!");
