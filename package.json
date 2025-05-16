@@ -3,6 +3,7 @@
 		"express": "^4.18.2",
 		"express-handlebars": "^8.0.1",
 		"express-handlebars-paginate": "^1.0.3",
+		"express-session": "^1.18.1",
 		"pg": "^8.14.1",
 		"pg-hstore": "^2.3.4",
 		"sequelize": "^6.37.7"

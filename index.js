@@ -3,11 +3,14 @@ const PORT = 50505
 const app = EXPRESS()
 const expressHBS = require("express-handlebars");
 const {createRatingStar, formatDate} = require("./helper/helperHBS");
-const { createPagination } = require("express-handlebars-paginate")
+const { createPagination } = require("express-handlebars-paginate");
+const session = require("express-session");
 
 
 app.use(EXPRESS.static(__dirname + "/html"));
 app.use(EXPRESS.json());
+app.use(EXPRESS.urlencoded({extended: false}));
+
 
 app.engine(
     "hbs",
@@ -26,6 +29,22 @@ app.engine(
     })
 );
 app.set("view engine", "hbs");
+app.use(session({
+    secret: 'hamming_distance',
+    resave: false,
+    saveUninitialized: false,
+    cookie:{
+        httpOnly: true,
+        maxAge: 60*60*1000
+    }
+}));
+
+app.use((req,res,next) =>{
+    let cart = require("./controllers/cart");
+    req.session.cart = new cart(req.session.cart ? req.session.cart : {} );
+    res.locals.quantity  = req.session.cart.quantity;
+    next();
+})
 
 
 app.use("/",require("./routers/indexRouter"));
