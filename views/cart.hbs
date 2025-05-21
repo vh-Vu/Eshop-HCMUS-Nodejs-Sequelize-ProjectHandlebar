@@ -12,10 +12,11 @@
 </div>
 <!-- Breadcrumb End -->
 
-
+{{#with cart}}
 <!-- Cart Start -->
 <div class="cart-page">
     <div class="container">
+        {{#if items.length}}
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -31,22 +32,22 @@
                             </tr>
                         </thead>
                         <tbody class="align-middle">
-                            {{#each productsInCart}}
+                            {{#each items}}
                                 <tr>
                                     {{#with product}}
-                                    <td><a href="#"><img src="{{imagePath}}" alt="Image"></a></td>
-                                    <td><a href="#">{{name}}</a></td>
+                                    <td><a href="/products/{{id}}"><img src="{{imagePath}}" alt="{{name}}"></a></td>
+                                    <td><a href="/products/{{id}}">{{name}}</a></td>
                                     <td>${{price}}</td>
                                     {{/with}}
                                     <td>
                                         <div class="qty">
-                                            <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                            <input type="text" value="{{quantity}}">
-                                            <button class="btn-plus" onclick=""><i class="fa fa-plus"></i></button>
+                                            <button class="btn-minus" onclick=updateCart({{product.id}},parseInt(quantity{{product.id}}.value)-1)><i class="fa fa-minus"></i></button>
+                                            <input type="text" value="{{quantity}}" id="quantity{{product.id}}">
+                                            <button class="btn-plus" onclick=updateCart({{product.id}},parseInt(quantity{{product.id}}.value)+1)><i class="fa fa-plus"></i></button>
                                         </div>
                                     </td>
-                                    <td>${{total}}</td>
-                                    <td><button><i class="fa fa-trash"></i></button></td>
+                                    <td id="total{{product.id}}">${{total}}</td>
+                                    <td><button onclick="removeCart({{product.id}})"><i class="fa fa-trash"></i></button></td>
                                 </tr>
                             {{/each}}
                         </tbody>
@@ -65,18 +66,25 @@
                 <div class="cart-summary">
                     <div class="cart-content">
                         <h3>Cart Summary</h3>
-                        <p>Sub Total<span>$22</span></p>
-                        <p>Shipping Cost<span>$1</span></p>
-                        <h4>Grand Total<span>$23</span></h4>
+                        <p>Sub Total<span id="subtotal">${{subtotal}}</span></p>
+                        <p>Shipping Cost<span id="shipping">${{shipping}}</span></p>
+                        <h4>Grand Total<span id="total">${{total}}</span></h4>
                     </div>
                     <div class="cart-btn">
-                        <button>Update Cart</button>
-                        <button>Checkout</button>
+                        <button onclick="clearCart()">Clear Cart</button>
+                        <button onclick="window.location.href='/users/checkout'">Checkout</button>
                     </div>
                 </div>
             </div>
         </div>
+        {{else}}
+        <div class="text-center border py-3">
+            <h3>Your cart is empty!</h3>
+        </div>
+        {{/if}}
     </div>
 </div>
+{{/with}}
+
 <!-- Cart End -->
         
