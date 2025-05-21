@@ -9,7 +9,6 @@ controller.show = (req,res) =>{
 controller.login = (req,res, next) =>{
     const keepSignedIn = req.body.keepSignedIn;
     passport.authenticate("local-login", (error, user) => {
-            console.log("sign")
         if (error) return next(error);
         if (!user) return res.redirect("/users/login");
 
@@ -21,7 +20,12 @@ controller.login = (req,res, next) =>{
     })(req,res,next);
 
 }
-
+controller.logout = (req,res,next) =>{
+    req.logout( error => {
+        if (error) return mext(error);
+        res.redirect("/");
+    })
+}
 // controller.register = async(req,res) =>{
 
 // };

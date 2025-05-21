@@ -45,7 +45,12 @@
                         <div class="user">
                             <div class="dropdown">
                                 {{#if isLoggedIn}}
-                                <a href="/users/my-account">My Account</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
+                                <div class="dropdown-menu">
+                                    <a href="/users/my-account" class="dropdown-item">Profile</a>
+                                    <a href="/users/wishlist" class="dropdown-item">Wishlist</a>
+                                    <a href="/users/logout" class="dropdown-item">Logout</a>
+                                </div>
                                 {{else}}
                                 <a href="/users/login">Login &amp; Register</a>
                                 {{/if}}
