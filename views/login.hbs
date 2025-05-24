@@ -43,13 +43,17 @@
                                 </div>  
                             </div>
                             <div class="col-md-12">
-                                <button class="btn">Submit</button>
+                                <button class="btn">Login</button>
                             </div>
                             {{#if loginMessage}}
                             <div class="col-md-12">
                                 <div class="p-3 mt-3 alert alert-warning">{{{loginMessage}}}</div>
-                                </div>
+                            </div>
                             {{/if}}
+                            <input type="hidden" name="reqUrl" value="{{reqUrl}}">
+                            <div class="col-md-12 py-3">
+                                <a href="/users/forgot">Forgot Password?</a>
+                             </div>
                         </div>
                     </div>
                 </form>
@@ -57,7 +61,7 @@
             </div>
             
             <div class="col-md-6">
-                <form action="/users/register" method="post">
+                <form action="/users/register" method="post" id="formRegister">
                     <div class="register-form">
                         <div class="row">
                             <div class="col-md-6">
@@ -76,9 +80,29 @@
                                 <label>Mobile No</label>
                                 <input class="form-control" type="text" placeholder="Mobile No" name="mobile" required>
                             </div>
-                            <div class="col-md-12">
-                                <button class="btn">Submit</button>
+                            <div class="col-md-6">
+                                <label>Password</label>
+                                <input class="form-control" type="password" placeholder="Password" name="password"  id="password" required  
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    onchange="checkPasswordConfirm('formRegister')"
+                                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters">
                             </div>
+                            <div class="col-md-6">
+                                <label>Confirm Password</label>
+                                <input class="form-control" type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword" required  
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    onkeyup="checkPasswordConfirm('formRegister')"
+                                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters">
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn">Register</button>
+                            </div>
+                            {{#if registerMessage}}
+                            <div class="col-md-12">
+                                <div class="p-3 mt-3 alert alert-warning">{{{registerMessage}}}</div>
+                            </div>
+                            {{/if}}
+                             <input type="hidden" name="reqUrl" value="{{reqUrl}}">
                         </div>
                     </div>
                 </form>    

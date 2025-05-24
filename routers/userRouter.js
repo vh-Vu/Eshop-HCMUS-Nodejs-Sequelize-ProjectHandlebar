@@ -2,7 +2,10 @@ const EXPRESS = require("express");
 const router = EXPRESS.Router();
 const userController = require("../controllers/userController");
 const {body, validationResult} = require("express-validator");
+const authenController = require("../controllers/authenController");
 
+
+router.use(authenController.isLogin);
 router.get("/checkout",userController.checkout);
 router.post("/placeorders",
     body("firstName").notEmpty().withMessage("First name is required!"),

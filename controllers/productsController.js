@@ -96,16 +96,19 @@ ProductController.showDetailPage = async(req,res) => {
             {model: Tags, attributes: ["id"]}
         ]
     });
+    if(!product) return res.status(404).render("error", {message: "File not found!"});
     res.locals.product = product;
-    const tagIDs = [];
-    product.Tags.forEach(tag => tagIDs.push(tag.id));
+    if(product.Tags){
+        const tagIDs = [];
+        product.Tags.forEach(tag => tagIDs.push(tag.id));
 
-    res.locals.relations = await Products.findAll({
-        include:[
-            {model: Tags, attributes: ["id"], where: {id: {[sequelize.Op.in]:tagIDs}}}
-        ],
-        where: {id: {[sequelize.Op.ne] : id}}
-    })    
+        res.locals.relations = await Products.findAll({
+            include:[
+                {model: Tags, attributes: ["id"], where: {id: {[sequelize.Op.in]:tagIDs}}}
+            ],
+            where: {id: {[sequelize.Op.ne] : id}}
+        })    
+    }
     res.render("product-detail");
 };
 

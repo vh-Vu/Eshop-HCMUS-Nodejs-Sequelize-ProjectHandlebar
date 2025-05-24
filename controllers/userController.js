@@ -3,7 +3,7 @@ const { where } = require("sequelize");
 const models = require("../models")
 userController.checkout = async(req,res) =>{
     if(req.session.cart.quantity == 0)   {res.redirect("/products"); return}
-    const userId = 1;
+    const userId = req.user.id;
     res.locals.addresses = await models.Address.findAll({where:{userId}});
     res.locals.cart = req.session.cart.getCart();
     res.render("checkout");
@@ -38,7 +38,7 @@ userController.placeOrders = async(req,res) =>{
 }
 
 async function saveOrders(req,res,status) {
-    const userId = 1;
+    const userId = req.user.id;
     const {items,...other} = req.session.cart.getCart();
     const order = await models.Order.create({
         ...other,
@@ -58,7 +58,8 @@ async function saveOrders(req,res,status) {
     return res.render("error",{message: "Thank you for your order!"});
 }
 
-userController.myAccount = (req,res) => res.render("my-account");
-
+userController.myAccount = (req,res) => {
+    res.render("my-account");
+}
 
 module.exports = userController;

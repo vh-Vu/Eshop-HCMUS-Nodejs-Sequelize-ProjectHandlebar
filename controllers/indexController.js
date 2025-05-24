@@ -20,7 +20,7 @@ controller.showHomePage = async(req,res) => {
         order: [["createdAt","DESC"]],
         limit: 10
     })
-    res.locals.Brand = await Brands.findAll();
+    res.locals.Brands = await Brands.findAll();
     const categories = await Categories.findAll();
     const second = categories.splice(2,2);
     const third = categories.splice(1,1);
